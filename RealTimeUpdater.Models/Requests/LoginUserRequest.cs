@@ -6,9 +6,5 @@ using System.Threading.Tasks;
 
 namespace RealTimeUpdater.Models.Requests
 {
-	public class LoginUserRequest
-	{
-		public string Email { get; set; }
-		public string Password { get; set; }
-	}
+	public record LoginUserRequest(string Email,string Password);
 }
