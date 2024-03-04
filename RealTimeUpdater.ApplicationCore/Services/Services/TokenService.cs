@@ -1,17 +1,11 @@
-﻿using JWT.Algorithms;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using RealTimeUpdater.ApplicationCore.Services.Interfaces;
 using RealTimeUpdater.Models.Entities;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RealTimeUpdater.ApplicationCore.Services.Services
 {
@@ -32,7 +26,7 @@ namespace RealTimeUpdater.ApplicationCore.Services.Services
 				new Claim(JwtRegisteredClaimNames.UniqueName,user.UserName)
 			};
 
-			var creds = new SigningCredentials(_symmetricKey, SecurityAlgorithms.HmacSha512);
+			var creds = new SigningCredentials(_symmetricKey, SecurityAlgorithms.HmacSha256Signature);
 			var tokenDescriptor = new SecurityTokenDescriptor()
 			{
 				Subject = new ClaimsIdentity(claims),

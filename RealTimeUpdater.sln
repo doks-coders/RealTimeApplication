@@ -5,13 +5,11 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealTimeUpdater", "RealTimeUpdater\RealTimeUpdater.csproj", "{2F9151E9-E0A7-4575-8F18-F722D30A9A2E}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "RealtimeClient", "RealtimeClient\RealtimeClient.esproj", "{A177858C-5995-4F8A-AB73-A45DBFD298E5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealTimeUpdater.Infrastructure", "RealTimeUpdater.Infrastructure\RealTimeUpdater.Infrastructure.csproj", "{4A11A9CC-C74B-4441-9E9D-1B0843C4E40C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealTimeUpdater.ApplicationCore", "RealTimeUpdater.ApplicationCore\RealTimeUpdater.ApplicationCore.csproj", "{8EBC5FAB-0083-4DD2-8099-79E0EEE9AB7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealTimeUpdater.ApplicationCore", "RealTimeUpdater.ApplicationCore\RealTimeUpdater.ApplicationCore.csproj", "{8EBC5FAB-0083-4DD2-8099-79E0EEE9AB7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealTimeUpdater.Models", "RealTimeUpdater.Models\RealTimeUpdater.Models.csproj", "{DC581299-4867-4098-B1E0-7C8A1F0C235D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealTimeUpdater.Models", "RealTimeUpdater.Models\RealTimeUpdater.Models.csproj", "{DC581299-4867-4098-B1E0-7C8A1F0C235D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +21,6 @@ Global
 		{2F9151E9-E0A7-4575-8F18-F722D30A9A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F9151E9-E0A7-4575-8F18-F722D30A9A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F9151E9-E0A7-4575-8F18-F722D30A9A2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A177858C-5995-4F8A-AB73-A45DBFD298E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A177858C-5995-4F8A-AB73-A45DBFD298E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A177858C-5995-4F8A-AB73-A45DBFD298E5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A177858C-5995-4F8A-AB73-A45DBFD298E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A177858C-5995-4F8A-AB73-A45DBFD298E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A177858C-5995-4F8A-AB73-A45DBFD298E5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{4A11A9CC-C74B-4441-9E9D-1B0843C4E40C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4A11A9CC-C74B-4441-9E9D-1B0843C4E40C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A11A9CC-C74B-4441-9E9D-1B0843C4E40C}.Release|Any CPU.ActiveCfg = Release|Any CPU

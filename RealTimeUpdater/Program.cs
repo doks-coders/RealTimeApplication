@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+using RealTimeUpdater.Extensions;
 using RealTimeUpdater.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +8,8 @@ builder.Services.AddSignalR();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSingleton<PresenceTracker>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>
@@ -38,7 +40,7 @@ app.UseCors(u => u.AllowAnyHeader().AllowAnyMethod()
 app.MapHub<UpdatesHub>("hubs/updates");
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -13,9 +13,12 @@ namespace RealTimeUpdater.Infrastructure.Configurations
 	{
 		public void Configure(EntityTypeBuilder<AppRole> builder)
 		{
-			builder.HasMany(e => e.AppUserRoles)
-				.WithOne(e => e.Role)
-				.HasForeignKey(e => e.RoleId);
+			builder.HasMany(k => k.AppUserRoles)
+				.WithOne(u => u.AppRole)
+				.HasForeignKey(u => u.RoleId)
+				.IsRequired()
+				.OnDelete(DeleteBehavior.NoAction); // Specify ON DELETE NO ACTION
+
 		}
 	}
 }

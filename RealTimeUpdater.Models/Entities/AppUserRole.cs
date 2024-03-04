@@ -9,7 +9,7 @@ namespace RealTimeUpdater.Models.Entities
 {
 	public class AppUserRole:IdentityUserRole<int>
 	{
-		public ApplicationUser User { get; set; }
-		public AppRole Role { get; set; }	
+		public ApplicationUser AppUser { get; set; }
+		public AppRole AppRole { get; set; }	
 	}
 }

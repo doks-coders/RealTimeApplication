@@ -17,9 +17,11 @@ namespace RealTimeUpdater.Controllers
             _userManager=userManager;
 			_tokenService=tokenService;
         }
+
+		[HttpPost("register")]
         public async Task<ActionResult> Register([FromBody]RegisterUserRequest registerUser)
 		{
-			var user = new ApplicationUser { UserName = registerUser.Email };
+			var user = new ApplicationUser { UserName = registerUser.Email,Email=registerUser.Email };
 			var res = await _userManager.CreateAsync(user, registerUser.Password);
 			if (res.Succeeded)
 			{
@@ -32,6 +34,7 @@ namespace RealTimeUpdater.Controllers
 			
 		}
 
+		[HttpPost("login")]
 		public async Task<ActionResult> LoginUser([FromBody] LoginUserRequest loginUser)
 		{
 			var user = await _userManager.Users.FirstOrDefaultAsync(e => e.UserName == loginUser.Email);

@@ -2,7 +2,7 @@
 
 namespace RealTimeUpdater.Controllers
 {
-	[Route("api/{controller}")]
+	[Route("api/[controller]")]
 	public class ParentController : ControllerBase
 	{
 
