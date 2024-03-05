@@ -1,0 +1,33 @@
+
+.chatbox{
+    width: 100%; overflow-y: auto;
+    flex-direction: column;
+    display: flex;
+}
+.my-message{
+    display: flex; 
+    justify-content: flex-start;
+    width: 100%;
+}
+.my-chat-box {
+    max-width: 200px;
+    background: #2ba44c;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.partner-message{
+    display: flex; 
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.my-partner-box {
+    max-width: 200px;
+    background: wheat;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+}

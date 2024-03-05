@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Order Tracker</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+            <ng-container >
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+              </li>
+
+            </ng-container>
+  
+            <ng-container >
+                  
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/chat" routerLinkActive="active">Chat</a>
+              </li>
+            </ng-container>
+  
+          
+        
+        </ul>
+  
+        <ul class="navbar-nav" >
+          <li  class="nav-item">
+            <div class="dropdown" dropdown>
+              <a class="nav-link text-light" dropdownToggle>Account </a>
+              <div class="dropdown-menu" *dropdownMenu>
+                <a class="nav-link dropdown-item" routerLink="/register">Register</a>
+                <a class="nav-link dropdown-item" routerLink="/login">Log In</a>
+                <a class="nav-link dropdown-item" (click)="logout()">Log Out</a>
+           
+              </div>
+            </div>
+          </li>
+          <li *ngIf="false" class="nav-item">
+            <div class="dropdown" dropdown>
+              <a class="nav-link text-light" dropdownToggle>Welcome User</a>
+              <div class="dropdown-menu" *dropdownMenu>
+                <a class="nav-link dropdown-item" (click)="logout()">Log Out</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+  
+      </div>
+    </div>
+  </nav>

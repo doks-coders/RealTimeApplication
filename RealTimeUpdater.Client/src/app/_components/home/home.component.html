@@ -1,0 +1,19 @@
+
+
+<!---
+    <canvas baseChart
+  [type]="'pie'"
+  [datasets]="($charData|async)?.pieChartDatasets"
+  [labels]="($charData|async)?.pieChartLabels"
+  [options]="pieChartOptions"
+  [plugins]="pieChartPlugins"
+  [legend]="pieChartLegend">
+</canvas>
+-->
+<h2 class="text-center">Get Current Data</h2>
+
+<div class="d-flex justify-content-center" style="font-size: x-large;">{{sum}}</div>
+
+<div style="height: 400px ;display: block;">
+    <canvas #myChart></canvas>
+  </div>
