@@ -9,10 +9,10 @@ using System.Text;
 
 namespace RealTimeUpdater.ApplicationCore.Services.Services
 {
-	public class TokenService:ITokenService
+	public class TokenService : ITokenService
 	{
 		private readonly SymmetricSecurityKey _symmetricKey;
-		public TokenService(IConfiguration config, UserManager<ApplicationUser> userManager) 
+		public TokenService(IConfiguration config, UserManager<ApplicationUser> userManager)
 		{
 
 			_symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["SecurityKey"]));
@@ -36,10 +36,10 @@ namespace RealTimeUpdater.ApplicationCore.Services.Services
 
 			var tokenHandler = new JwtSecurityTokenHandler();
 
-			var securityToken =  tokenHandler.CreateToken(tokenDescriptor);
-			
+			var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+
 			return tokenHandler.WriteToken(securityToken); ;
 		}
-		
+
 	}
 }

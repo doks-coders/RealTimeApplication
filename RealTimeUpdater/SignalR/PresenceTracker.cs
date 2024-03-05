@@ -3,7 +3,7 @@
 	//Here we are going to create a presence tracker to track all the people using the sockets
 	public class PresenceTracker
 	{
-		public  Dictionary<string, List<string>> ConnectedUsers = new Dictionary<string, List<string>>();
+		public Dictionary<string, List<string>> ConnectedUsers = new Dictionary<string, List<string>>();
 
 		public List<string> ConnectionsMade = new();
 		/// <summary>
@@ -12,7 +12,7 @@
 		/// <param name="username"></param>
 		/// <param name="connectionId"></param>
 		#region Adding User Method
-		public void SetConnectedUser(string username,string connectionId)
+		public void SetConnectedUser(string username, string connectionId)
 		{
 			ConnectionsMade.Add(username);
 			lock (ConnectedUsers)
@@ -23,7 +23,7 @@
 				}
 				else
 				{
-					ConnectedUsers.Add(username, new List<string>() { connectionId});
+					ConnectedUsers.Add(username, new List<string>() { connectionId });
 				}
 			}
 		}
@@ -62,7 +62,7 @@
 			return Task.FromResult(users);
 		}
 
-		public  Task GetUserConnections(string username)
+		public Task GetUserConnections(string username)
 		{
 			List<string> connectionIds;
 			lock (ConnectedUsers)
@@ -71,7 +71,7 @@
 			}
 			return Task.FromResult(connectionIds);
 		}
-		
-		
+
+
 	}
 }

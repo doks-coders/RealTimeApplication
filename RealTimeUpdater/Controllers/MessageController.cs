@@ -18,5 +18,5 @@ namespace RealTimeUpdater.Controllers
 			return Ok("Accessed");
 		}
 	}
-	
+
 }

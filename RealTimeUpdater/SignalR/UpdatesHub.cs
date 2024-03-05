@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace RealTimeUpdater.SignalR
 {
@@ -28,16 +25,16 @@ namespace RealTimeUpdater.SignalR
 
 			Enumerable.Range(0, 1000).ToList().ForEach((e) =>
 			{
-				numbers.Add(new List<int>() { 
-					rnd.Next(1, 10), 
-					rnd.Next(1, 10), 
-					rnd.Next(1, 10), 
-					rnd.Next(1, 10), 
-					rnd.Next(1, 10) 
+				numbers.Add(new List<int>() {
+					rnd.Next(1, 10),
+					rnd.Next(1, 10),
+					rnd.Next(1, 10),
+					rnd.Next(1, 10),
+					rnd.Next(1, 10)
 				});
 
 			});
-			
+
 			return numbers;
 		}
 
@@ -53,7 +50,7 @@ namespace RealTimeUpdater.SignalR
 				List<List<int>> data = GetNumbers();
 				for (int i = 0; i < data.Count; i++)
 				{
-					await Clients.All.SendAsync("UpdateInformation", new { array =  JsonSerializer.Serialize(data[i]) });
+					await Clients.All.SendAsync("UpdateInformation", new { array = JsonSerializer.Serialize(data[i]) });
 					await Task.Delay(800);
 				}
 			}

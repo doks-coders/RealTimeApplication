@@ -2,7 +2,7 @@
 
     <h3 style="text-align: center;">Login</h3>
 
-    <form [formGroup]="formGroup" (ngSubmit)="submitForm" >
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()" >
         <input formControlName="email" type="text" class="form-control" >
         <input formControlName="password" type="password" class="form-control" >
         <div class="d-flex justify-content-center">
