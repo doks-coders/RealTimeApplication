@@ -14,12 +14,12 @@ namespace RealTimeUpdater.Controllers
 
 		public UsersController(UserManager<ApplicationUser> userManager)
 		{
-			_userManager = userManager;	
+			_userManager = userManager;
 		}
 		[HttpGet("all-users")]
 		public async Task<ActionResult> AllUsers()
 		{
-			return Ok(await _userManager.Users.Where(e=>e.Email!=null).Select(e=>new UserResponse(e.Email,e.Id)).ToListAsync());
+			return Ok(await _userManager.Users.Where(e => e.Email != null).Select(e => new UserResponse(e.Email, e.Id)).ToListAsync());
 		}
 	}
 }

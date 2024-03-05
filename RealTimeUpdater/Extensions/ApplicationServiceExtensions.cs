@@ -2,6 +2,8 @@
 using RealTimeUpdater.ApplicationCore.Services.Interfaces;
 using RealTimeUpdater.ApplicationCore.Services.Services;
 using RealTimeUpdater.Infrastructure.Data;
+using RealTimeUpdater.Infrastructure.Repository.Interfaces;
+using RealTimeUpdater.Infrastructure.Repository.Repositories;
 
 namespace RealTimeUpdater.Extensions
 {
@@ -11,6 +13,7 @@ namespace RealTimeUpdater.Extensions
 		{
 			services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 			services.AddScoped<ITokenService, TokenService>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			return services;
 		}
 	}

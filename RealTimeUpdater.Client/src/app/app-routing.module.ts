@@ -14,7 +14,7 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"messages",component:MessagesComponent},
-  {path:"chat",component:ChatComponent},
+  {path:"chat/:id",component:ChatComponent},
   {path:"**",component:HomeComponent, pathMatch:"full"},
 ];
 

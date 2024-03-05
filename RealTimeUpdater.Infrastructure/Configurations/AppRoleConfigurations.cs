@@ -14,6 +14,8 @@ namespace RealTimeUpdater.Infrastructure.Configurations
 				.IsRequired()
 				.OnDelete(DeleteBehavior.NoAction); // Specify ON DELETE NO ACTION
 
+
+
 		}
 	}
 }

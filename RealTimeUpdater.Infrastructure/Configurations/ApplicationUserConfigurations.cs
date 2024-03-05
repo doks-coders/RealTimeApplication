@@ -13,7 +13,6 @@ namespace RealTimeUpdater.Infrastructure.Configurations
 				.HasForeignKey(u => u.UserId)
 				.IsRequired()
 				.OnDelete(DeleteBehavior.NoAction); // Specify ON DELETE NO ACTION
-
 		}
 	}
 }
