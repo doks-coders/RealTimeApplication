@@ -1,11 +1,13 @@
-<div class="d-flex justify-content-center align-items-center "style="height: 100%;">
+<div class="d-flex justify-content-center align-items-center flex-column" style="height: 100%;">
 
     <h3 style="text-align: center;">Login</h3>
 
     <form [formGroup]="formGroup" (ngSubmit)="submitForm" >
-        <input formGroupName="email" type="text" class="form-control" >
-        <input formGroupName="password" type="password" class="form-control" >
-
-        <button class="btn btn-primary" type="submit">Login</button>
+        <input formControlName="email" type="text" class="form-control" >
+        <input formControlName="password" type="password" class="form-control" >
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+        
     </form>
 </div>

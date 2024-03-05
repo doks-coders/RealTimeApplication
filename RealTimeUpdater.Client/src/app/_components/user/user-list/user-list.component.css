@@ -1,0 +1,23 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px; /* Adjust the gap between items as needed */
+}
+
+.grid-item {
+    /* Add styling for individual items */
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid-item {
+    width: 25%; /* Set the width to 25% to achieve 4 items per row */
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+    padding: 10px;
+    border: 1px solid #ccc;
+}
