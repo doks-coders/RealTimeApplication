@@ -9,7 +9,7 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class RealTimeDataService {
   userSource = new BehaviorSubject<string|null>(null);
   currentUser$ = this.userSource.asObservable();
   baseUrl=environment.hubUrl;

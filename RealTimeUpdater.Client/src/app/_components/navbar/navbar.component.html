@@ -20,30 +20,24 @@
                 <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/chat" routerLinkActive="active">Chat</a>
-              </li>
             </ng-container>
-  
-          
         
         </ul>
   
         <ul class="navbar-nav" >
-          <li  class="nav-item">
+          <li *ngIf="!(authService.$currentUser|async)"   class="nav-item">
             <div class="dropdown" dropdown>
               <a class="nav-link text-light" dropdownToggle>Account </a>
               <div class="dropdown-menu" *dropdownMenu>
                 <a class="nav-link dropdown-item" routerLink="/register">Register</a>
                 <a class="nav-link dropdown-item" routerLink="/login">Log In</a>
                 <a class="nav-link dropdown-item" (click)="logout()">Log Out</a>
-           
               </div>
             </div>
           </li>
-          <li *ngIf="false" class="nav-item">
+          <li *ngIf="(authService.$currentUser|async)?.email" class="nav-item">
             <div class="dropdown" dropdown>
-              <a class="nav-link text-light" dropdownToggle>Welcome User</a>
+              <a class="nav-link text-light" dropdownToggle>Welcome {{(authService.$currentUser|async)?.email}}</a>
               <div class="dropdown-menu" *dropdownMenu>
                 <a class="nav-link dropdown-item" (click)="logout()">Log Out</a>
               </div>

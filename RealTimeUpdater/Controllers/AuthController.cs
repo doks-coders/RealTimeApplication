@@ -25,7 +25,7 @@ namespace RealTimeUpdater.Controllers
 			var res = await _userManager.CreateAsync(user, registerUser.Password);
 			if (res.Succeeded)
 			{
-				return Ok(new SignedUpUserResponse(
+				return Ok(new UserResponse(
 					Email : user.Email,
 					Token : await _tokenService.CreateToken(user)
 					));
@@ -43,7 +43,7 @@ namespace RealTimeUpdater.Controllers
 
 			if (matches)
 			{
-				return Ok(new SignedUpUserResponse(
+				return Ok(new UserResponse(
 					Email: user.Email,
 					Token: await _tokenService.CreateToken(user)
 					));

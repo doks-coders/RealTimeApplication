@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace RealTimeUpdater.Models.Response
 {
-	public record SignedUpUserResponse(string Email, string Token);
+	public record UserResponse(string Email, string Token);
 
 }

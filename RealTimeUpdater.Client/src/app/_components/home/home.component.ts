@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { RealTimeDataService } from 'src/app/_services/realtime-data.service';
 import { Chart, ChartOptions } from 'chart.js/auto';
 import { BehaviorSubject, Observable } from 'rxjs';
 @Component({
@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  constructor(private authentication: AuthenticationService) { }
+  constructor(private realtimeData: RealTimeDataService) { }
   sum: number = 0;
   @ViewChild('myChart') myChart?: ElementRef;
   private chart?: Chart<'bar'>;
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.authentication.currentUser$.subscribe({
+    this.realtimeData.currentUser$.subscribe({
       next: (e) => {
         if (e) {
           let array: number[] = JSON.parse(e)

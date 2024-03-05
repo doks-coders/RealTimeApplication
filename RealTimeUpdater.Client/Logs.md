@@ -36,3 +36,6 @@ ng g c _components/user-profiles/edit-user --skip-tests
    ng g c _components/misc/orders-modal --skip-tests
 
 ng g s _services/auth --skip-tests
+
+
+ng g interceptor _interceptors/jwt --skip-tests

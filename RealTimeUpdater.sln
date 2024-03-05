@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealTimeUpdater.Application
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealTimeUpdater.Models", "RealTimeUpdater.Models\RealTimeUpdater.Models.csproj", "{DC581299-4867-4098-B1E0-7C8A1F0C235D}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "RealTimeUpdater.Client", "RealTimeUpdater.Client\RealTimeUpdater.Client.esproj", "{E254AAFF-8E1D-40BD-82F3-ED9DFCE5A22F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{DC581299-4867-4098-B1E0-7C8A1F0C235D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC581299-4867-4098-B1E0-7C8A1F0C235D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC581299-4867-4098-B1E0-7C8A1F0C235D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E254AAFF-8E1D-40BD-82F3-ED9DFCE5A22F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E254AAFF-8E1D-40BD-82F3-ED9DFCE5A22F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E254AAFF-8E1D-40BD-82F3-ED9DFCE5A22F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E254AAFF-8E1D-40BD-82F3-ED9DFCE5A22F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E254AAFF-8E1D-40BD-82F3-ED9DFCE5A22F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E254AAFF-8E1D-40BD-82F3-ED9DFCE5A22F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

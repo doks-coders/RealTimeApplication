@@ -19,6 +19,7 @@ import { UserListComponent } from './_components/user/user-list/user-list.compon
 import { UserCardComponent } from './_components/user/user-card/user-card.component';
 import { MessagesComponent } from './_components/messages/messages.component';
 import { ChatComponent } from './_components/chat/chat.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ChatComponent } from './_components/chat/chat.component';
   providers: [
   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   provideCharts(withDefaultRegisterables())
 
 ],

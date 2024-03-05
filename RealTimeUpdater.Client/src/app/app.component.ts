@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from './_services/authentication.service';
+import {  RealTimeDataService } from './_services/realtime-data.service';
+import { AuthService } from './_services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,12 @@ import { AuthenticationService } from './_services/authentication.service';
 })
 export class AppComponent implements OnInit {
  
-  constructor(private authService:AuthenticationService){}
+  constructor(private authService:AuthService){}
 
   ngOnInit(): void {
-    this.setCurrentUser(); 
-    this.authService.intialiseConnection();
+    this.authService.initialiseUser();
+    //this.authService.intialiseConnection();
 
   }
-  setCurrentUser(){
 
-   }
 }
