@@ -4,6 +4,7 @@ import { UserResponse } from '../_models/user.response';
 import { HttpClient } from '@angular/common/http';
 import { map, of } from 'rxjs';
 import { MessageRequest } from '../_models/message.request';
+import { MessageResponse } from '../_models/message.response';
 
 
 @Injectable({
@@ -26,6 +27,10 @@ export class MessageService {
 
   sendMessage(message:MessageRequest){
     return this.httpClient.post(this.baseUrl+"message/send-message",message)
+  }
+
+  getMessages(id:number){
+    return this.httpClient.get<MessageResponse []>(this.baseUrl+"message/get-chatmessages/"+id)
   }
 
 }

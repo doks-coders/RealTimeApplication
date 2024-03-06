@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RealTimeUpdater.Extensions;
 using RealTimeUpdater.Models.Entities;
 using RealTimeUpdater.Models.Response;
 
@@ -19,7 +20,7 @@ namespace RealTimeUpdater.Controllers
 		[HttpGet("all-users")]
 		public async Task<ActionResult> AllUsers()
 		{
-			return Ok(await _userManager.Users.Where(e => e.Email != null).Select(e => new UserResponse(e.Email, e.Id)).ToListAsync());
+			return Ok(await _userManager.Users.Where(e => e.Email != null && e.Id != User.GetUserId()).Select(e => new UserResponse(e.Email, e.Id)).ToListAsync());
 		}
 	}
 }

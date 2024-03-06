@@ -1,18 +1,12 @@
+<h5 style="text-align: center;">{{recieverEmail}}</h5>
 <div class="d-flex justify-content-center">
     <div style="width: 100%;">
-        <div class="chatbox" style="height: 100%;">
-            <div class="partner-message">
-                <div class="my-partner-box">
-                    Name Danie kjdjsfksjfskjfskfjskjfsksfjk
+        <div class="chatbox" >
+            <div *ngFor="let chatMessage of chatMessages"  [ngClass]="(chatMessage.recieverId!=recieverId)?'partner-message':'my-message'">
+                <div [ngClass]="(chatMessage.recieverId!=recieverId)?'my-partner-box':'my-chat-box'">
+                    {{chatMessage.content}}
                 </div>
             </div>
-
-            <div class="my-message">
-                <div class="my-chat-box">
-                    Name Danie kjdjsfksjfskjfskfjskjfsksfjk
-                </div>
-            </div>
-
         </div>
         <form [formGroup]="formGroup" (ngSubmit)="submitMessage()">
             <div class="p-3 d-flex justify-content-center">
