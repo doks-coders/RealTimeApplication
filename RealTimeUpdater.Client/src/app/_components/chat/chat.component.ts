@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs';
+import { delay, take } from 'rxjs';
 import { MessageRequest } from 'src/app/_models/message.request';
 import { MessageResponse } from 'src/app/_models/message.response';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -12,12 +12,13 @@ import { MessageService } from 'src/app/_services/message.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
-
+export class ChatComponent implements OnInit,AfterViewInit {
+  
+  @ViewChild('parentDiv', { static: false }) parentDiv?: ElementRef;
   formGroup:FormGroup = new FormGroup({});
 
   chatMessages:MessageResponse[] = [];
-
+  scrollPosition:number=0;
   recieverId?:number;
   recieverEmail?:string;
 
@@ -26,12 +27,27 @@ export class ChatComponent implements OnInit {
     private authService:AuthService,
     private formBuilder:FormBuilder){}
 
+  ngAfterViewInit(): void {
+    this.messageService.$messagesObserved.pipe(delay(100)).subscribe({
+      next:(_)=>{
+        this.messageService.$messagesObserved.subscribe({
+          next:(value)=>{
+            this.scrollToElement();
+          }
+        })
+      }
+    })
+
+    
+  }
+
   ngOnInit(): void {
     this.getUserDetails();
     this.formGroup = this.formBuilder.group({
       content:["",Validators.required]
     })
 
+   
   }
 
   getUserDetails(){
@@ -40,7 +56,7 @@ export class ChatComponent implements OnInit {
        this.recieverId =  Number(data.get("id"));
         this.intialiseConnectionToHub(this.recieverId.toString());
        
-       this.getUserMessages(this.recieverId);
+       //this.getUserMessages(this.recieverId);
       }
     })
   }
@@ -55,14 +71,21 @@ export class ChatComponent implements OnInit {
     })
 
     //The magic happens here
-    this.messageService.$messagesObserved.subscribe({
-      next:(value)=>{
-        console.log("Magic area");
-        console.log(value);
-      }
-    })
+  
   }
 
+  scrollToElement() {
+    if(this.parentDiv){
+      this.scrollPosition += this.parentDiv.nativeElement.scrollHeight+50;
+      console.log(this.parentDiv.nativeElement.scrollHeight)
+    }
+    
+  }
+
+  onScroll(e:Event){
+    this.scrollPosition = (e.target as HTMLElement).scrollTop;
+    console.log(e);
+  }
   getUserMessages(id:number){
     this.messageService.getMessages(id).subscribe({
       next:(users)=>{

@@ -34,13 +34,10 @@ export class MessageService {
     this.hubConnection.start();
 
     this.hubConnection.on("UserMessages",(element)=>{
-      console.log({element})
       this.messagesSource.next(element);
     })
 
-    this.hubConnection.on("NewMessage",(element)=>{
-      console.log({element})
-      
+    this.hubConnection.on("NewMessage",(element)=>{      
       this.$messagesObserved.pipe(take(1)).subscribe({
         next:(messages)=>{
           let newMessages = [...messages, element];

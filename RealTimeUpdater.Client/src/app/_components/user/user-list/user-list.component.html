@@ -3,6 +3,7 @@
    
 <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
 
+<h4 *ngIf="!users.length" class="text-center">No Users</h4>
 
     <!-- Repeat for additional items -->
 </div>

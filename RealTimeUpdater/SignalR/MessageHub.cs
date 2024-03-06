@@ -30,8 +30,8 @@ namespace RealTimeUpdater.SignalR
 
 			
 			string RecieverId = httpContext.Request.Query["RecieverId"];
+			if (RecieverId == null) throw new HubException("No User");
 			var RecieverUser = await _userManager.Users.FirstOrDefaultAsync(e => e.Id == int.Parse(RecieverId));
-
 
 			string GroupName = GetGroupName(Context.User.GetUserName(), RecieverUser.UserName);
 			await Groups.AddToGroupAsync(Context.ConnectionId, GroupName);
@@ -67,10 +67,24 @@ namespace RealTimeUpdater.SignalR
 			await _messageService.SendMessage(messageRequest,Context.User.GetUserId());
 		}
 
-		public override Task OnDisconnectedAsync(Exception? exception)
+		public async Task<string> GetGroupWithConnectionId(string connectionId)
 		{
+			var connection = await _unitOfWork.Connections.Get(u => u.ConnectionId == connectionId);
+			return connection.GroupName;
+		}
+
+		public override async Task<Task> OnDisconnectedAsync(Exception? exception)
+		{
+			var groupName = await GetGroupWithConnectionId(Context.ConnectionId);
+			if (groupName != null)
+			{
+				await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+			}
+			
 			return base.OnDisconnectedAsync(exception);
 		}
+
+	
 
 
 	
@@ -84,7 +98,7 @@ namespace RealTimeUpdater.SignalR
 			}
 			else
 			{
-				group.Connections.Add(new Connection(userName, Context.ConnectionId));
+				group.Connections.Add(new Connection(userName, Context.ConnectionId,groupName));
 			}
 			await _unitOfWork.Save();
 
