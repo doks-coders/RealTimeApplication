@@ -1,5 +1,5 @@
-﻿using RealTimeUpdater.ApplicationCore.Services.Interfaces;
-using RealTimeUpdater.Helpers;
+﻿using RealTimeUpdater.ApplicationCore.Helpers;
+using RealTimeUpdater.ApplicationCore.Services.Interfaces;
 using RealTimeUpdater.Infrastructure.Repository.Interfaces;
 using RealTimeUpdater.Infrastructure.Repository.Repositories;
 using RealTimeUpdater.Models.Requests;
@@ -19,6 +19,7 @@ namespace RealTimeUpdater.ApplicationCore.Services.Services
 		public MessageService(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
+			_mapper= new MessageMapper();	
 		}
 
 		public async Task<List<MessageResponse>> GetMessages(int recieverId,int userId)

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs';
 import { MessageRequest } from 'src/app/_models/message.request';
 import { MessageResponse } from 'src/app/_models/message.response';
+import { AuthService } from 'src/app/_services/auth.service';
 import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
@@ -20,7 +22,8 @@ export class ChatComponent implements OnInit {
   recieverEmail?:string;
 
   constructor(private route:ActivatedRoute,
-    private messageService:MessageService,
+    public messageService:MessageService,
+    private authService:AuthService,
     private formBuilder:FormBuilder){}
 
   ngOnInit(): void {
@@ -28,17 +31,34 @@ export class ChatComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       content:["",Validators.required]
     })
+
   }
 
   getUserDetails(){
     this.route.paramMap.subscribe({
       next:(data)=>{
        this.recieverId =  Number(data.get("id"));
-       let user = this.messageService.users.find(e=>e.id==this.recieverId);
-       if(user){
-        this.recieverEmail = user.email;
-       }
+        this.intialiseConnectionToHub(this.recieverId.toString());
+       
        this.getUserMessages(this.recieverId);
+      }
+    })
+  }
+
+  intialiseConnectionToHub(recieverName:string){
+    this.authService.$currentUser.pipe(take(1)).subscribe({
+      next:(user)=>{
+        if(user){
+          this.messageService.intialiseConnection(user,recieverName);
+        }
+      }
+    })
+
+    //The magic happens here
+    this.messageService.$messagesObserved.subscribe({
+      next:(value)=>{
+        console.log("Magic area");
+        console.log(value);
       }
     })
   }
@@ -59,6 +79,10 @@ export class ChatComponent implements OnInit {
         content,
         recieverId:this.recieverId,
       }
+
+      this.messageService.sendMessageUsingHub(message);
+      this.formGroup.reset();
+      /*
       this.messageService.sendMessage(message).subscribe({
         next:(_)=>{
           console.log("Message Sent");
@@ -67,6 +91,7 @@ export class ChatComponent implements OnInit {
           this.formGroup.reset();
         }
       })
+      */
     }
     
   }

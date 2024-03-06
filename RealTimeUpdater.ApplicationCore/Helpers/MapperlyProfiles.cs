@@ -3,7 +3,7 @@ using RealTimeUpdater.Models.Requests;
 using RealTimeUpdater.Models.Response;
 using Riok.Mapperly.Abstractions;
 
-namespace RealTimeUpdater.Helpers
+namespace RealTimeUpdater.ApplicationCore.Helpers
 {
 
 	[Mapper]

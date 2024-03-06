@@ -23,7 +23,7 @@ namespace RealTimeUpdater.ApplicationCore.Services.Services
 			List<Claim> claims = new()
 			{
 				new Claim(JwtRegisteredClaimNames.NameId,user.Id.ToString()),
-				new Claim(JwtRegisteredClaimNames.UniqueName,user.UserName)
+				new Claim(JwtRegisteredClaimNames.UniqueName,user.Email)
 			};
 
 			var creds = new SigningCredentials(_symmetricKey, SecurityAlgorithms.HmacSha256Signature);

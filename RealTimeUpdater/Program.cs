@@ -22,6 +22,8 @@ builder.Services.AddCors(options =>
 			.AllowCredentials());
 });
 
+
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -33,18 +35,20 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
-app.UseCors(u => u.AllowAnyHeader().AllowAnyMethod()
-.AllowCredentials()
-.WithOrigins("https://localhost:4200"));
 
-app.MapHub<UpdatesHub>("hubs/updates");
-
-app.MapHub<MessageHub>("hubs/messages");
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors(u => u.AllowAnyHeader().AllowAnyMethod()
+.AllowCredentials()
+.WithOrigins("https://localhost:4200"));
+
 app.MapControllers();
+
+app.MapHub<UpdatesHub>("hubs/updates");
+
+app.MapHub<MessageHub>("hubs/messages");
 
 app.Run();

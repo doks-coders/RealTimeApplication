@@ -19,6 +19,8 @@ namespace RealTimeUpdater.Infrastructure.Data
 		public DbSet<AppRole> Roles { get; set; }
 		public DbSet<AppUserRole> UserRoles { get; set; }
 		public DbSet<Message> Messages { get; set; }
+		public DbSet<Connection> Connections { get; set; }
+		public DbSet<Group> Groups { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

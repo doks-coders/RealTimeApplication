@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using RealTimeUpdater.ApplicationCore.Helpers;
 using RealTimeUpdater.ApplicationCore.Services.Interfaces;
 using RealTimeUpdater.Extensions;
-using RealTimeUpdater.Helpers;
 using RealTimeUpdater.Infrastructure.Repository.Interfaces;
 using RealTimeUpdater.Models.Entities;
 using RealTimeUpdater.Models.Requests;
@@ -17,27 +17,30 @@ namespace RealTimeUpdater.SignalR
 		private readonly IMessageService _messageService;
 		private readonly MessageMapper _mapper;
 		private readonly UserManager<ApplicationUser> _userManager;
-		public MessageHub(IUnitOfWork unitOfWork,IMessageService messageService,UserManager<ApplicationUser> userManager, MessageMapper mapper)
+		public MessageHub(IUnitOfWork unitOfWork,IMessageService messageService,UserManager<ApplicationUser> userManager)
 		{
 			_unitOfWork = unitOfWork;
 			_messageService = messageService;
 			_userManager = userManager;
-			_mapper = mapper;
+			_mapper = new MessageMapper();
 		}
 		public override async Task<Task> OnConnectedAsync()
 		{
 			var httpContext = Context.GetHttpContext();
-			string RecieverName = httpContext.Request.Query["RecieverName"];
-	
-			string GroupName = GetGroupName(Context.User.GetUserName(), RecieverName);
+
+			
+			string RecieverId = httpContext.Request.Query["RecieverId"];
+			var RecieverUser = await _userManager.Users.FirstOrDefaultAsync(e => e.Id == int.Parse(RecieverId));
+
+
+			string GroupName = GetGroupName(Context.User.GetUserName(), RecieverUser.UserName);
 			await Groups.AddToGroupAsync(Context.ConnectionId, GroupName);
 
-			var RecieverUser =  await _userManager.Users.FirstOrDefaultAsync(e=>e.UserName == RecieverName);
 			var messages = await _messageService.GetMessages(RecieverUser.Id, Context.User.GetUserId());
 			
 			await Clients.Group(GroupName).SendAsync("UserMessages",messages);
 
-			await AddConnectionToGroup(Context.User.GetUserName(), RecieverName);
+			await AddConnectionToGroup(Context.User.GetUserName(), RecieverUser.UserName);
 
 			return base.OnConnectedAsync();
 		}
@@ -90,10 +93,12 @@ namespace RealTimeUpdater.SignalR
 		private string GetGroupName(string UserName, string RecieverName)
 		{
 			int o = string.CompareOrdinal(UserName, RecieverName);
-			if (o == 0)
+			
+			if (o < 0)
 			{
 				return $"{RecieverName}-{UserName}";
 			}
+			
 			return $"{UserName}-{RecieverName}";
 		}
 

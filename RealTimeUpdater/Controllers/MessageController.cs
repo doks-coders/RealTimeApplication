@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RealTimeUpdater.ApplicationCore.Helpers;
+using RealTimeUpdater.ApplicationCore.Services.Interfaces;
+using RealTimeUpdater.ApplicationCore.Services.Services;
 using RealTimeUpdater.Extensions;
-using RealTimeUpdater.Helpers;
 using RealTimeUpdater.Infrastructure.Repository.Interfaces;
 using RealTimeUpdater.Models.Requests;
 
@@ -12,10 +14,12 @@ namespace RealTimeUpdater.Controllers
 	{
 		private readonly IUnitOfWork _unitOfWork;
 		private readonly MessageMapper _mapper;
-		public MessageController(IUnitOfWork unitOfWork)
+		private readonly IMessageService _messageService;
+		public MessageController(IUnitOfWork unitOfWork, IMessageService messageService)
 		{
 			_unitOfWork = unitOfWork;
 			_mapper = new MessageMapper();
+			_messageService = messageService;
 		}
 		[HttpPost("Send-Message")]
 		public async Task<ActionResult> SendMessage([FromBody] MessageRequest messageRequest)
@@ -36,19 +40,9 @@ namespace RealTimeUpdater.Controllers
 		[HttpGet("get-chatmessages/{recieverId}")]
 		public async Task<ActionResult> GetMessage(int recieverId)
 		{
-			var messages = await _unitOfWork.Messages.GetAll(u =>
-			u.RecieverId == recieverId
-			&&
-			u.SenderId == User.GetUserId()
-			|| //Both Sides
-			u.SenderId == recieverId
-			&&
-			u.RecieverId == User.GetUserId()
-			);
-			if (messages == null) return BadRequest("");
-			messages = messages.OrderBy(e => e.DateCreated);
-
-			var res = _mapper.MessageToMessageResponse(messages.ToList());
+			var res = await _messageService.GetMessages(recieverId, User.GetUserId());
+			
+	
 
 			return Ok(res);
 		}

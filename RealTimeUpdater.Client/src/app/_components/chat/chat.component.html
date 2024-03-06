@@ -2,7 +2,7 @@
 <div class="d-flex justify-content-center">
     <div style="width: 100%;">
         <div class="chatbox" >
-            <div *ngFor="let chatMessage of chatMessages"  [ngClass]="(chatMessage.recieverId!=recieverId)?'partner-message':'my-message'">
+            <div *ngFor="let chatMessage of (messageService.$messagesObserved | async)"  [ngClass]="(chatMessage.recieverId!=recieverId)?'partner-message':'my-message'">
                 <div [ngClass]="(chatMessage.recieverId!=recieverId)?'my-partner-box':'my-chat-box'">
                     {{chatMessage.content}}
                 </div>

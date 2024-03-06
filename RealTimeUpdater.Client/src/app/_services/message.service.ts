@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UserResponse } from '../_models/user.response';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, of } from 'rxjs';
+import { BehaviorSubject, map, of, take } from 'rxjs';
 import { MessageRequest } from '../_models/message.request';
 import { MessageResponse } from '../_models/message.response';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
@@ -22,10 +22,10 @@ export class MessageService {
 
   constructor(private httpClient:HttpClient) { }
 
-  intialiseConnection(user:AuthUserResponse, recieverName:string){
-    this.hubConnection = new HubConnectionBuilder().withUrl(this.hubUrl+`messages?RecieverName=${recieverName}`,{
-      accessTokenFactory(){
-        return user.token
+  intialiseConnection(user:AuthUserResponse, recieverId:string){
+    this.hubConnection = new HubConnectionBuilder().withUrl(this.hubUrl+`messages?RecieverId=${recieverId}`,{
+      accessTokenFactory() {
+        return user.token;
       }
     })
     .withAutomaticReconnect()
@@ -34,7 +34,20 @@ export class MessageService {
     this.hubConnection.start();
 
     this.hubConnection.on("UserMessages",(element)=>{
+      console.log({element})
       this.messagesSource.next(element);
+    })
+
+    this.hubConnection.on("NewMessage",(element)=>{
+      console.log({element})
+      
+      this.$messagesObserved.pipe(take(1)).subscribe({
+        next:(messages)=>{
+          let newMessages = [...messages, element];
+          this.messagesSource.next(newMessages);
+        }
+      })
+      
     })
 
   }
@@ -50,6 +63,10 @@ export class MessageService {
 
   sendMessage(message:MessageRequest){
     return this.httpClient.post(this.baseUrl+"message/send-message",message)
+  }
+
+  sendMessageUsingHub(message:MessageRequest){
+    return this.hubConnection?.invoke("SendMessage",message);
   }
 
   getMessages(id:number){
