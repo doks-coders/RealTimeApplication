@@ -4,7 +4,7 @@ namespace RealTimeUpdater.Extensions
 {
 	public static class ClaimsExtensions
 	{
-		public static string? GetUserName(this ClaimsPrincipal user)
+		public static string GetUserName(this ClaimsPrincipal user)
 		{
 			return user.FindFirstValue(ClaimTypes.Name);
 		}

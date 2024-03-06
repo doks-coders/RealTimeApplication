@@ -10,9 +10,11 @@
 		<PackageReference Include="JWT" Version="10.1.1" />
 		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.0" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.1.2" />
+		<PackageReference Include="Riok.Mapperly" Version="3.4.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\RealTimeUpdater.Infrastructure\RealTimeUpdater.Infrastructure.csproj" />
 	  <ProjectReference Include="..\RealTimeUpdater.Models\RealTimeUpdater.Models.csproj" />
 	</ItemGroup>
 

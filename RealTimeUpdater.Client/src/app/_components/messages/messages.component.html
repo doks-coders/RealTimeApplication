@@ -1,5 +1,10 @@
+
+<div class="d-flex">
+    <button [ngClass]="'btn '+(mode=='inbox'?'btn-primary':'btn-alert')" (click)="getMailMessages('inbox')">Inbox</button>
+    <button [ngClass]="'btn '+(mode=='outbox'?'btn-primary':'btn-alert')" (click)="getMailMessages('outbox')">Outbox</button>
+</div>
 <div style="height: 20px;"></div>
-<table  datatable class="hover table">
+<table *ngIf="messages.length"  datatable class="hover table">
     <thead>
         <tr>
             <th>Message</th>
@@ -9,11 +14,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr >
-            <td>Message</td>
-            <td>Daniel</td>
-            <td>User</td>
-            <td>12/21/4121</td>
+        <tr *ngFor="let message of messages">
+            <td>{{message.content}}</td>
+            <td>{{message.recieverId}}</td>
+            <td>{{message.senderId}}</td>
+            <td>{{message.dateCreated | date}}</td>
         </tr>
     </tbody>
 </table>

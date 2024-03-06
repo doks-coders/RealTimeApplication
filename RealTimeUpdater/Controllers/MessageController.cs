@@ -15,7 +15,7 @@ namespace RealTimeUpdater.Controllers
 		public MessageController(IUnitOfWork unitOfWork)
 		{
 			_unitOfWork = unitOfWork;
-			_mapper= new MessageMapper();
+			_mapper = new MessageMapper();
 		}
 		[HttpPost("Send-Message")]
 		public async Task<ActionResult> SendMessage([FromBody] MessageRequest messageRequest)
@@ -33,25 +33,40 @@ namespace RealTimeUpdater.Controllers
 
 		}
 
-		[HttpGet("Get-ChatMessages/{recieverId}")]
+		[HttpGet("get-chatmessages/{recieverId}")]
 		public async Task<ActionResult> GetMessage(int recieverId)
 		{
-			var messages = await _unitOfWork.Messages.GetAll(u=>
-			u.RecieverId==recieverId 
-			||
-			u.SenderId==User.GetUserId()
+			var messages = await _unitOfWork.Messages.GetAll(u =>
+			u.RecieverId == recieverId
+			&&
+			u.SenderId == User.GetUserId()
 			|| //Both Sides
 			u.SenderId == recieverId
-			||
+			&&
 			u.RecieverId == User.GetUserId()
 			);
 			if (messages == null) return BadRequest("");
-			messages = messages.OrderBy(e=>e.DateCreated);
+			messages = messages.OrderBy(e => e.DateCreated);
 
-			var res =  _mapper.MessageToMessageResponse(messages.ToList());
-			
+			var res = _mapper.MessageToMessageResponse(messages.ToList());
+
 			return Ok(res);
 		}
+
+		[HttpGet("get-mail-message")]
+		public async Task<ActionResult> GetMailMessage([FromQuery] string mode)
+		{
+			var user = await _unitOfWork.Users.Get(u => u.Id == User.GetUserId(), includeProperties: "InboxMessages,OutBoxMessages");
+			var messages = mode switch
+			{
+				"inbox" => user.InboxMessages,
+				"outbox" => user.OutBoxMessages,
+				_ => (await _unitOfWork.Messages.GetAll(u => u.RecieverId == User.GetUserId() || u.SenderId == User.GetUserId())).ToList()
+			}; ;
+			var res = _mapper.MessageToMessageResponse(messages.OrderByDescending(e => e.DateCreated).ToList());
+			return Ok(res);
+		}
+
 	}
 
 }

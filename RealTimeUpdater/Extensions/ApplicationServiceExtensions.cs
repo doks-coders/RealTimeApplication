@@ -14,6 +14,7 @@ namespace RealTimeUpdater.Extensions
 			services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 			services.AddScoped<ITokenService, TokenService>();
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
+			services.AddScoped<IMessageService, MessageService>();
 			return services;
 		}
 	}

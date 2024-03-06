@@ -39,6 +39,8 @@ app.UseCors(u => u.AllowAnyHeader().AllowAnyMethod()
 
 app.MapHub<UpdatesHub>("hubs/updates");
 
+app.MapHub<MessageHub>("hubs/messages");
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

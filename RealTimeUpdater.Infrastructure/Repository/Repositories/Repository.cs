@@ -16,7 +16,7 @@ namespace RealTimeUpdater.Infrastructure.Repository.Repositories
 		}
 
 
-		public async Task<T?> Get(Expression<Func<T, bool>>? expression, string? includeProperties)
+		public async Task<T?> Get(Expression<Func<T, bool>>? expression, string? includeProperties=null)
 		{
 			IQueryable<T> query = _dbSet.AsQueryable();
 

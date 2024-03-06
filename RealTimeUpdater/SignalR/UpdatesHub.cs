@@ -57,7 +57,6 @@ namespace RealTimeUpdater.SignalR
 
 
 
-			//Group group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);
 
 			//string groupName = GetGroupName(sender.UserName, recipient.UserName);
 			//Group group = await _unitOfWork.MessageRepository.GetMessageGroup(groupName);

@@ -1,10 +1,11 @@
-﻿using RealTimeUpdater.Infrastructure.Repository.Repositories;
-
-namespace RealTimeUpdater.Infrastructure.Repository.Interfaces
+﻿namespace RealTimeUpdater.Infrastructure.Repository.Interfaces
 {
 	public interface IUnitOfWork
 	{
-		MessageRepository Messages { get; }
+		IMessageRepository Messages { get; }
+		IUserRepository Users { get; }
+		IGroupRepository Groups { get; }
+		IConnectionRepository Connections { get; }
 
 		Task<bool> Save();
 	}
