@@ -7,7 +7,6 @@ using RealTimeUpdater.Extensions;
 using RealTimeUpdater.Infrastructure.Repository.Interfaces;
 using RealTimeUpdater.Models.Entities;
 using RealTimeUpdater.Models.Requests;
-using RealTimeUpdater.Models.Response;
 
 namespace RealTimeUpdater.SignalR
 {
@@ -17,7 +16,7 @@ namespace RealTimeUpdater.SignalR
 		private readonly IMessageService _messageService;
 		private readonly MessageMapper _mapper;
 		private readonly UserManager<ApplicationUser> _userManager;
-		public MessageHub(IUnitOfWork unitOfWork,IMessageService messageService,UserManager<ApplicationUser> userManager)
+		public MessageHub(IUnitOfWork unitOfWork, IMessageService messageService, UserManager<ApplicationUser> userManager)
 		{
 			_unitOfWork = unitOfWork;
 			_messageService = messageService;
@@ -28,17 +27,19 @@ namespace RealTimeUpdater.SignalR
 		{
 			var httpContext = Context.GetHttpContext();
 
-			
-			string RecieverId = httpContext.Request.Query["RecieverId"];
+
+			string? RecieverId = httpContext?.Request.Query["RecieverId"];
+
 			if (RecieverId == null) throw new HubException("No User");
 			var RecieverUser = await _userManager.Users.FirstOrDefaultAsync(e => e.Id == int.Parse(RecieverId));
 
 			string GroupName = GetGroupName(Context.User.GetUserName(), RecieverUser.UserName);
+
 			await Groups.AddToGroupAsync(Context.ConnectionId, GroupName);
 
 			var messages = await _messageService.GetMessages(RecieverUser.Id, Context.User.GetUserId());
-			
-			await Clients.Group(GroupName).SendAsync("UserMessages",messages);
+
+			await Clients.Group(GroupName).SendAsync("UserMessages", messages);
 
 			await AddConnectionToGroup(Context.User.GetUserName(), RecieverUser.UserName);
 
@@ -57,14 +58,14 @@ namespace RealTimeUpdater.SignalR
 			var GroupName = GetGroupName(Context.User.GetUserName(), recipientUser.UserName);
 
 			var group = await _unitOfWork.Groups.Get(u => u.Name == GroupName);
-			
+
 
 			//Putting an event here that should be used for notifications
 
 
 			await Clients.Group(GroupName).SendAsync("NewMessage", response);
 
-			await _messageService.SendMessage(messageRequest,Context.User.GetUserId());
+			await _messageService.SendMessage(messageRequest, Context.User.GetUserId());
 		}
 
 		public async Task<string> GetGroupWithConnectionId(string connectionId)
@@ -80,25 +81,25 @@ namespace RealTimeUpdater.SignalR
 			{
 				await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
 			}
-			
+
 			return base.OnDisconnectedAsync(exception);
 		}
 
-	
 
 
-	
-		private async Task AddConnectionToGroup(string userName,string recieverName)
+
+
+		private async Task AddConnectionToGroup(string userName, string recieverName)
 		{
 			string groupName = GetGroupName(userName, recieverName);
 			Group? group = await _unitOfWork.Groups.Get(e => e.Name == groupName);
-			if(group == null)
+			if (group == null)
 			{
 				await _unitOfWork.Groups.Add(new Group { Name = groupName });
 			}
 			else
 			{
-				group.Connections.Add(new Connection(userName, Context.ConnectionId,groupName));
+				group.Connections.Add(new Connection(userName, Context.ConnectionId, groupName));
 			}
 			await _unitOfWork.Save();
 
@@ -107,12 +108,12 @@ namespace RealTimeUpdater.SignalR
 		private string GetGroupName(string UserName, string RecieverName)
 		{
 			int o = string.CompareOrdinal(UserName, RecieverName);
-			
+
 			if (o < 0)
 			{
 				return $"{RecieverName}-{UserName}";
 			}
-			
+
 			return $"{UserName}-{RecieverName}";
 		}
 

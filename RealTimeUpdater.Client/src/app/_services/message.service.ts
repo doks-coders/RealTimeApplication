@@ -48,6 +48,8 @@ export class MessageService {
     })
 
   }
+
+
   getAllUsers(){
     if(this.users.length) return of(this.users);
     return this.httpClient.get<UserResponse []>(this.baseUrl+"users/all-users").pipe(map(val=>{
@@ -57,20 +59,31 @@ export class MessageService {
       return val;
     }))
   }
-
-  sendMessage(message:MessageRequest){
-    return this.httpClient.post(this.baseUrl+"message/send-message",message)
-  }
+ 
 
   sendMessageUsingHub(message:MessageRequest){
     return this.hubConnection?.invoke("SendMessage",message);
   }
 
-  getMessages(id:number){
-    return this.httpClient.get<MessageResponse []>(this.baseUrl+"message/get-chatmessages/"+id)
-  }
+  
   getMailMessages(mode:string){
     return this.httpClient.get<MessageResponse []>(this.baseUrl+`message/get-mail-message/?mode=${mode}`)
   }
 
 }
+
+ /*
+  Send Message Request: [Redundant]
+  ----------------------------------
+  sendMessage(message:MessageRequest){
+    return this.httpClient.post(this.baseUrl+"message/send-message",message)
+  }
+  */
+
+  /*
+  Get All Chat Messages Request: [Redundant]
+  ----------------------------------
+  getMessages(id:number){
+    return this.httpClient.get<MessageResponse []>(this.baseUrl+"message/get-chatmessages/"+id)
+  }
+  */

@@ -6,7 +6,7 @@ namespace RealTimeUpdater.Infrastructure.Repository.Repositories
 	public class UnitOfWork : IUnitOfWork
 	{
 		public IMessageRepository Messages { get; }
-		
+
 		public IUserRepository Users { get; }
 
 		public IGroupRepository Groups { get; }

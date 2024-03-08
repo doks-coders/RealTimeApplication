@@ -13,6 +13,6 @@ namespace RealTimeUpdater.ApplicationCore.Helpers
 
 		public partial List<MessageResponse> MessageToMessageResponse(List<Message> messages);
 
-		public partial MessageResponse MessageRequestToRespone(MessageRequest message);	
+		public partial MessageResponse MessageRequestToRespone(MessageRequest message);
 	}
 }

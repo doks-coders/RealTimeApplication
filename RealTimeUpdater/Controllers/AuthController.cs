@@ -22,6 +22,8 @@ namespace RealTimeUpdater.Controllers
 		public async Task<ActionResult> Register([FromBody] RegisterUserRequest registerUser)
 		{
 			var user = new ApplicationUser { UserName = registerUser.Email, Email = registerUser.Email };
+			if (await _userManager.FindByEmailAsync(registerUser.Email) != null) return BadRequest("User Exists");
+
 			var res = await _userManager.CreateAsync(user, registerUser.Password);
 			if (res.Succeeded)
 			{
@@ -37,7 +39,8 @@ namespace RealTimeUpdater.Controllers
 		[HttpPost("login")]
 		public async Task<ActionResult> LoginUser([FromBody] LoginUserRequest loginUser)
 		{
-			var user = await _userManager.Users.FirstOrDefaultAsync(e => e.UserName == loginUser.Email);
+
+			var user = await _userManager.FindByEmailAsync(loginUser.Email);
 			if (user == null) return BadRequest("User Not Found");
 			var matches = await _userManager.CheckPasswordAsync(user, loginUser.Password);
 
@@ -49,6 +52,10 @@ namespace RealTimeUpdater.Controllers
 					));
 			}
 			return BadRequest("Passwords do not match");
+		}
+		public async Task CheckIfUser(string email)
+		{
+			await _userManager.Users.FirstOrDefaultAsync(e => e.UserName == email);
 		}
 	}
 }
