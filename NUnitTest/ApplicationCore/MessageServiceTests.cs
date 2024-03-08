@@ -30,23 +30,23 @@ namespace NUnitTest.ApplicationCore
 				context.Messages.AddRange(
 				new List<Message>(){
 
-				new Message(){
-					Content="My name is Mary",
-					DateCreated=DateTime.Now,
-					DateRead=DateTime.Now,
-					RecieverId=1,
-					SenderId=2,
-					Deleted=false
-				},
+					new Message(){
+						Content="My name is Mary",
+						DateCreated=DateTime.Now,
+						DateRead=DateTime.Now,
+						RecieverId=1,
+						SenderId=2,
+						Deleted=false
+					},
 
-				new Message(){
-					Content="My name is Peter",
-					DateCreated=DateTime.Now,
-					DateRead=DateTime.Now,
-					RecieverId=1,
-					SenderId=2,
-					Deleted=false
-				},
+					new Message(){
+						Content="My name is Peter",
+						DateCreated=DateTime.Now,
+						DateRead=DateTime.Now,
+						RecieverId=1,
+						SenderId=2,
+						Deleted=false
+					}
 
 				});
 

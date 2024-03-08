@@ -4,6 +4,9 @@ using RealTimeUpdater.Models.Entities;
 
 namespace RealTimeUpdater.Infrastructure.Configurations
 {
+	/// <summary>
+	/// Entity configuration for Connection
+	/// </summary>
 	internal class ConnectionConfiguration : IEntityTypeConfiguration<Connection>
 	{
 		public void Configure(EntityTypeBuilder<Connection> builder)

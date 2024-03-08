@@ -2,6 +2,9 @@
 
 namespace RealTimeUpdater.Models.Entities
 {
+	/// <summary>
+	/// This is the message entity. It creates the tables for storing the message data
+	/// </summary>
 	public class Message
 	{
 		[Key]

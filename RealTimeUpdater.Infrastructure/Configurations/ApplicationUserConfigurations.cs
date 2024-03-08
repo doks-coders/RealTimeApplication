@@ -4,6 +4,9 @@ using RealTimeUpdater.Models.Entities;
 
 namespace RealTimeUpdater.Infrastructure.Configurations
 {
+	/// <summary>
+	/// Entity configuration for ApplicationUser
+	/// </summary>
 	public class ApplicationUserConfigurations : IEntityTypeConfiguration<ApplicationUser>
 	{
 		public void Configure(EntityTypeBuilder<ApplicationUser> builder)
@@ -12,7 +15,7 @@ namespace RealTimeUpdater.Infrastructure.Configurations
 				.WithOne(u => u.AppUser)
 				.HasForeignKey(u => u.UserId)
 				.IsRequired()
-				.OnDelete(DeleteBehavior.NoAction); // Specify ON DELETE NO ACTION
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }

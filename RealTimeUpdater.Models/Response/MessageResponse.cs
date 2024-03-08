@@ -1,5 +1,9 @@
 ﻿namespace RealTimeUpdater.Models.Response
 {
+	/// <summary>
+	/// This is the response used for sending a message. 
+	/// It will be sent to the FrontEnd
+	/// </summary>
 	public class MessageResponse
 	{
 		public int Id { get; set; }

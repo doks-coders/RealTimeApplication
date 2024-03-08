@@ -2,6 +2,9 @@
 
 namespace RealTimeUpdater.Infrastructure.Repository.Interfaces
 {
+	/// <summary>
+	/// This is the base repository
+	/// </summary>
 	public interface IRepository<T> where T : class
 	{
 		Task<T?> Get(Expression<Func<T, bool>>? expression, string? includeProperties = null);

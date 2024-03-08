@@ -6,14 +6,14 @@ using System.Reflection;
 
 namespace RealTimeUpdater.Infrastructure.Data
 {
+	/// <summary>
+	/// DbContext for our Application
+	/// </summary>
 	public class ApplicationDbContext : IdentityDbContext<ApplicationUser, AppRole, int,
 		IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>,
 		IdentityRoleClaim<int>, IdentityUserToken<int>>
 	{
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-		{
-
-		}
+		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
 
 		public DbSet<ApplicationUser> Users { get; set; }
 		public DbSet<AppRole> Roles { get; set; }
@@ -27,8 +27,5 @@ namespace RealTimeUpdater.Infrastructure.Data
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 			base.OnModelCreating(modelBuilder);
 		}
-
-
-
 	}
 }

@@ -23,10 +23,15 @@ namespace RealTimeUpdater.SignalR
 			_userManager = userManager;
 			_mapper = new MessageMapper();
 		}
+
+		/// <summary>
+		/// Creating and Maintaining a connection between two users i.e Reciever and User
+		/// </summary>
+		/// <returns></returns>
+		/// <exception cref="HubException"></exception>
 		public override async Task<Task> OnConnectedAsync()
 		{
 			var httpContext = Context.GetHttpContext();
-
 
 			string? RecieverId = httpContext?.Request.Query["RecieverId"];
 
@@ -46,6 +51,12 @@ namespace RealTimeUpdater.SignalR
 			return base.OnConnectedAsync();
 		}
 
+		/// <summary>
+		/// Sending messages between between two users
+		/// </summary>
+		/// <param name="messageRequest"></param>
+		/// <returns></returns>
+		/// <exception cref="HubException"></exception>
 		public async Task SendMessage(MessageRequest messageRequest)
 		{
 			if (Context.User.GetUserId() == messageRequest.RecieverId) throw new HubException("Something is wrong");
@@ -60,7 +71,7 @@ namespace RealTimeUpdater.SignalR
 			var group = await _unitOfWork.Groups.Get(u => u.Name == GroupName);
 
 
-			//Putting an event here that should be used for notifications
+			//---Putting an event here that should be used for notifications---//
 
 
 			await Clients.Group(GroupName).SendAsync("NewMessage", response);
@@ -68,6 +79,11 @@ namespace RealTimeUpdater.SignalR
 			await _messageService.SendMessage(messageRequest, Context.User.GetUserId());
 		}
 
+		/// <summary>
+		/// This is for getting the groupName from the connection id
+		/// </summary>
+		/// <param name="connectionId"></param>
+		/// <returns></returns>
 		public async Task<string> GetGroupWithConnectionId(string connectionId)
 		{
 			var connection = await _unitOfWork.Connections.Get(u => u.ConnectionId == connectionId);
@@ -88,7 +104,12 @@ namespace RealTimeUpdater.SignalR
 
 
 
-
+		/// <summary>
+		/// This is for creating a group in the database and adding connections to it
+		/// </summary>
+		/// <param name="userName"></param>
+		/// <param name="recieverName"></param>
+		/// <returns></returns>
 		private async Task AddConnectionToGroup(string userName, string recieverName)
 		{
 			string groupName = GetGroupName(userName, recieverName);
@@ -105,6 +126,12 @@ namespace RealTimeUpdater.SignalR
 
 		}
 
+		/// <summary>
+		/// This for creating a groupname using two users names
+		/// </summary>
+		/// <param name="UserName"></param>
+		/// <param name="RecieverName"></param>
+		/// <returns></returns>
 		private string GetGroupName(string UserName, string RecieverName)
 		{
 			int o = string.CompareOrdinal(UserName, RecieverName);

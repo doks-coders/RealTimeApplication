@@ -12,7 +12,7 @@ namespace RealTimeUpdater.Infrastructure.Configurations
 				.WithOne(u => u.AppRole)
 				.HasForeignKey(u => u.RoleId)
 				.IsRequired()
-				.OnDelete(DeleteBehavior.NoAction); // Specify ON DELETE NO ACTION
+				.OnDelete(DeleteBehavior.NoAction);
 
 
 

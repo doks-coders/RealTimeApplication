@@ -1,5 +1,8 @@
 ﻿namespace RealTimeUpdater.Infrastructure.Repository.Interfaces
 {
+	/// <summary>
+	/// This is our unit of work
+	/// </summary>
 	public interface IUnitOfWork
 	{
 		IMessageRepository Messages { get; }

@@ -2,6 +2,9 @@
 
 namespace RealTimeUpdater.Models.Entities
 {
+	/// <summary>
+	/// This is the group entity. It contains the hub connections for each user
+	/// </summary>
 	public class Group
 	{
 		[Key]

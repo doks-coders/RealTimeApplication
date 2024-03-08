@@ -4,6 +4,9 @@ using RealTimeUpdater.Models.Entities;
 
 namespace RealTimeUpdater.Infrastructure.Configurations
 {
+	/// <summary>
+	/// Entity configuration for Message
+	/// </summary>
 	public class MessagesConfigurations : IEntityTypeConfiguration<Message>
 	{
 		public void Configure(EntityTypeBuilder<Message> builder)
@@ -20,3 +23,4 @@ namespace RealTimeUpdater.Infrastructure.Configurations
 		}
 	}
 }
+

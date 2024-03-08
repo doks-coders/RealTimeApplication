@@ -1,5 +1,8 @@
 ﻿namespace RealTimeUpdater.Models.Entities
 {
+	/// <summary>
+	/// This is the connection entity. It gets the connections from our Hub in SignalR
+	/// </summary>
 	public class Connection
 	{
 		public int Id { get; set; }
