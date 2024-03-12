@@ -4,6 +4,9 @@ using RealTimeUpdater.Models.Entities;
 
 namespace RealTimeUpdater.Infrastructure.Configurations
 {
+	/// <summary>
+	/// Entity configuration for AppRole
+	/// </summary>
 	public class AppRoleConfigurations : IEntityTypeConfiguration<AppRole>
 	{
 		public void Configure(EntityTypeBuilder<AppRole> builder)
