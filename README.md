@@ -3,7 +3,7 @@
 # Realtime Chat
 
 This is a Realtime Chatting Application built on the robust .NET MVC framework and Angular.
-[Watch Video](https://youtu.be/PGDe9YxOP7Q)
+[Watch Video](https://youtu.be/ItE3jjQj1Do)
 
 
 ## Installation
@@ -20,4 +20,4 @@ This application allows users to exchange messages seamlessly. It employs Signal
 - User Authentication: Implement user authentication and authorization using Angular and .NET API, allowing users to sign in securely and access the chat platform.
 
 # Model Design
-[![Medical Platform](https://firebasestorage.googleapis.com/v0/b/blogs-1c218.appspot.com/o/Screenshot%20(796).png?alt=media&token=63e26ebd-03e2-40bd-941c-6e7dd6269583)](https://firebasestorage.googleapis.com/v0/b/blogs-1c218.appspot.com/o/Screenshot%20(796).png?alt=media&token=63e26ebd-03e2-40bd-941c-6e7dd6269583)
+[![Medical Platform](https://firebasestorage.googleapis.com/v0/b/blogs-1c218.appspot.com/o/Screenshot%20(799).png?alt=media&token=3caffe54-c825-4d0a-8adb-a8f637e52628)](https://firebasestorage.googleapis.com/v0/b/blogs-1c218.appspot.com/o/Screenshot%20(799).png?alt=media&token=3caffe54-c825-4d0a-8adb-a8f637e52628)
