@@ -12,7 +12,7 @@ This is a Realtime Chatting Application built on the robust .NET MVC framework a
   git clone https://github.com/doks-coders/RealTimeApplication
 ```
 # About
-This apps enables users to send messags back and forth to each other. It utlises SignalR to send messages using websockets to users. These messages are stored in the SQL database using the Entity Framework. It also uses JWT Authentication for security. 
+This application allows users to exchange messages seamlessly. It employs SignalR to transmit messages via websockets, facilitating real-time communication. The messages are securely stored in a SQL database using the Entity Framework. Additionally, JWT Authentication is implemented to ensure robust security measures.
 
 # Features
 - Real-time Messaging: Enable users to send and receive messages instantly, with updates pushed to all connected clients in real-time using SignalR.
