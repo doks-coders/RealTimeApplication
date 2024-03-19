@@ -23,7 +23,7 @@ This application allows users to exchange messages seamlessly. It employs Signal
 ## Technologies Implemented
 - ASP.NET WebAPI 8.0
 - ASP.NET Identity Core
-- AutoMapper
+- Riok.Mapperly
 - FluentValidator
 - ASP.NET WebApi Core with JWT Bearer Authentication
 
